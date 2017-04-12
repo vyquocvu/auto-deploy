@@ -1,4 +1,5 @@
 # auto-deploy
+```sh
 dockercompose.sampel
 version: '2'
 services:
@@ -44,3 +45,7 @@ services:
 #    ports:
 #      - '1081:1080'
 #      - '1026:1025'
+```
+import database
+`docker exec -i $(docker-compose ps -q db) mysql -uroot -p123123 job_crawler_staging  < struc.sql`
+`docker exec -i $(docker-compose ps -q db) mysql -uroot -p123123 job_crawler_staging  < data.sql`
