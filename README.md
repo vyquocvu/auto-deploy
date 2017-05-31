@@ -48,7 +48,7 @@ services:
 ```
 import database
 
-`docker exec -i $(docker-compose ps -q db) mysql -uroot -p123123 job_crawler_staging  < struc.sql`
+`docker exec -i $(docker-compose ps -q db) mysql -uroot -p12123 staging  < struc.sql`
 
 
-`docker exec -i $(docker-compose ps -q db) mysql -uroot -p123123 job_crawler_staging  < data.sql`
+`docker exec -i $(docker-compose ps -q db) mysql -uroot -p12123 staging  < data.sql`
