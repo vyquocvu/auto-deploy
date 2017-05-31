@@ -24,10 +24,10 @@ RUN yum install -y postfix mailx cyrus-sasl cyrus-sasl-plain cyrus-sasl-md5 rsys
 
 RUN ln -sf /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime
 
-### Create user zigexn and install rbenv
-RUN groupadd -g 507 zigexn && useradd -u 507 -g 507 -m zigexn
+### Create user vyvu and install rbenv
+RUN groupadd -g 507 vyvu && useradd -u 507 -g 507 -m vyvu
 
-RUN groupadd rbenv && usermod -a -G rbenv zigexn
+RUN groupadd rbenv && usermod -a -G rbenv vyvu
 
 RUN echo 'export RBENV_ROOT=/usr/local/rbenv' > /etc/profile.d/rbenv.sh && \
     echo 'export PATH="$RBENV_ROOT/bin:$PATH"' >> /etc/profile.d/rbenv.sh && \
@@ -74,15 +74,15 @@ RUN mkdir -p /etc/nginx/conf.d && \
   echo "passenger_ruby /usr/local/rbenv/versions/$RUBY_VERSION/bin/ruby;" >> /etc/nginx/conf.d/passenger.conf
 
 # Create root app and bundle install
-RUN mkdir -p /home/projects/staging.job-crawler/current/public
-ADD ./Gemfile /home/projects/staging.job-crawler/current/Gemfile
-ADD ./Gemfile.lock /home/projects/staging.job-crawler/current/Gemfile.lock
-WORKDIR /home/projects/staging.job-crawler/current
+RUN mkdir -p /home/projects/myapp/current/public
+ADD ./Gemfile /home/projects/myapp/current/Gemfile
+ADD ./Gemfile.lock /home/projects/myapp/current/Gemfile.lock
+WORKDIR /home/projects/myapp/current
 
 RUN source /etc/profile.d/rbenv.sh && \
     gem install rainbow -v '2.2.1' && \
     bundle install && \
-    rm -rf /home/projects/staging.job-crawler/current
+    rm -rf /home/projects/myapp/current
 
 RUN yum clean all
 RUN yum install rsyslog -y
